@@ -4,6 +4,8 @@ import './App.css';
 import ContactForm from './components/ContactForm/ContactForm';
 import SearchBox from './components/SearchBox/SearchBox';
 import ContactList from './components/ContactList/ContactList';
+import { useDispatch, useSelector } from 'react-redux';
+// import { addContacts } from './redux/store';
 const listContacts = [
     { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
     { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
@@ -12,27 +14,29 @@ const listContacts = [
 ];
 
 function App() {
-    const [contacts, setContacts] = useState(() => {
-        const savedContacts = window.localStorage.getItem('saved-contacts');
-        return savedContacts !== null ? JSON.parse(savedContacts) : listContacts;
-    });
+    const contacts = useSelector(state => state.contacts.items);
+    // const [contacts, setContacts] = useState(() => {
+    //     const savedContacts = window.localStorage.getItem('saved-contacts');
+    //     return savedContacts !== null ? JSON.parse(savedContacts) : listContacts;
+    // });
+
+    // const dispatchApp = useDispatch()
+
+    // const contacts = () => {
+    //     const savedContacts = window.localStorage.getItem('saved-contacts');
+    //     return savedContacts !== null ? dispatchApp(addContacts()) JSON.parse(savedContacts) : listContacts;
+    // };
+
+    // const [contacts, setContacts] = useState(() => {
+    //     const savedContacts = window.localStorage.getItem('saved-contacts');
+    //     return savedContacts !== null ? JSON.parse(savedContacts) : listContacts;
+    // });
 
     const [filterContacts, setFiltrContacts] = useState('');
 
-    const addContact = newContact => {
-        setContacts(listContacts => {
-            return [...listContacts, newContact];
-        });
-    };
-
-    const visibleContacts = contacts.filter(contact =>
-        contact.name.toLowerCase().includes(filterContacts.toLowerCase())
-    );
-    const deleteContact = contactId => {
-        setContacts(prevContact => {
-            return prevContact.filter(contact => contact.id !== contactId);
-        });
-    };
+    // const visibleContacts = contacts.filter(contact =>
+    //     contact.name.toLowerCase().includes(filterContacts.toLowerCase())
+    // );
 
     useEffect(() => {
         localStorage.setItem('saved-contacts', JSON.stringify(contacts));
@@ -40,9 +44,9 @@ function App() {
     return (
         <>
             <h1>Phonebook</h1>
-            <ContactForm onContact={addContact} />
+            <ContactForm />
             <SearchBox value={filterContacts} onFilterContacts={setFiltrContacts} />
-            <ContactList listContacts={visibleContacts} onDelete={deleteContact} />
+            <ContactList />
         </>
     );
 }
