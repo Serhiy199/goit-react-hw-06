@@ -21,8 +21,7 @@ const contactsReducer = createSlice({
             },
         },
         deleteContacts(state, action) {
-            const index = state.items.findIndex(contact => contact.id === action.payload);
-            state.items.splice(index, 1);
+            state.items = state.items.filter(el => el.id !== action.payload);
         },
     },
 });
