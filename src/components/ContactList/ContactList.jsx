@@ -3,7 +3,6 @@ import Contact from '../Contact/Contact';
 import { list } from './ContactList.module.css';
 export default function ContactList() {
     const selectContacts = useSelector(state => state.contacts.items);
-    // console.log(selectContacts);
 
     return (
         <ul className={list}>
