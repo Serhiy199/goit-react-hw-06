@@ -1,6 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit';
-// import { useDispatch, useSelector } from 'react-redux';
-// const selectContacts = useSelector(state => state.contacts.items);
 
 const contactsFilterReducer = createSlice({
     name: 'filters',
@@ -11,19 +9,7 @@ const contactsFilterReducer = createSlice({
         nameFilter: {
             reducer: (state, action) => {
                 state.name = action.payload;
-                // console.log(action.payload);
-
-                // state.items.push(action.payload);
             },
-            // prepare: (name, number) => {
-            //     return {
-            //         payload: {
-            //             name,
-            //             number,
-            //             id: nanoid(),
-            //         },
-            //     };
-            // },
         },
     },
 });
